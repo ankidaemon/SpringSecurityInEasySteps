@@ -10,7 +10,7 @@
 
 <%session=request.getSession(false);%>
 <%if(session.getAttribute("username")==null){
-	response.sendRedirect("login.jsp");
+	response.sendRedirect("/SimpleSpringMVC");
 	return;}
 %>
 Hello, <b><%= session.getAttribute( "username" ) %></b>
