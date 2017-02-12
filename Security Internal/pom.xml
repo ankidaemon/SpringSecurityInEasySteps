@@ -4,7 +4,7 @@
 	<groupId>com.demo</groupId>
 	<artifactId>Security Internal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Security Internal</name>
+	<name>SecurityInternal</name>
 	<url>http://maven.apache.org</url>
 	
 	<dependencies>
