@@ -15,7 +15,7 @@
 %>
 Hello, <b><%= session.getAttribute( "username" ) %></b>
 <p>You Have successfully Logged in</p>  
-
+<p>Your Session Id is<%=session.getId() %></p>
     <a href="logout">LogOut</a>
 </body>
 </html>
