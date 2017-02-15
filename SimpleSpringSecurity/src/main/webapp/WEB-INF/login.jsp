@@ -22,6 +22,10 @@
             </tr>
             <tr><td><input type="submit" value="log In" /></td></tr>
             </table>
+            <%-- 
+            Section 2 - Video 2.4 - CSRF
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
+            <!-- <sec:csrfInput /> -->
     </form:form>
 </body>
 </html>

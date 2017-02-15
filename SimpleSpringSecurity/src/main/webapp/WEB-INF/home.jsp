@@ -13,7 +13,17 @@
 		<h2>
 			Welcome : ${pageContext.request.userPrincipal.name} | <a
 				href="${pageContext.request.contextPath}/logout"> Logout</a>
-		</h2>
+			
+			
+			<%-- 
+			Section 2 - Video 2.4 - CSRF and form login
+			<form name="form" method="get"
+				action="${pageContext.request.contextPath}/logout">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	
+				<input type="submit" value="Log Out" />
+				</form>
+ --%>		
+ 		</h2>
 		<p>Your Session id is: "${pageContext.request.session.id}"</p>
 	</c:if>
 
