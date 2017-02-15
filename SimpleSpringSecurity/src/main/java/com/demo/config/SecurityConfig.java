@@ -11,23 +11,37 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+/**
+ * @author ankidaemon
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
      
-/*   @Autowired
+   @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
             .inMemoryAuthentication()
                 .withUser("ankidaemon").password("password").roles("USER")
                 .and().withUser("test").password("test").roles("USER");
-    }*/
+    }
      
-    @Bean
+/*    @Bean
 	public UserDetailsService userDetailsService() {
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 		manager.createUser(User.withUsername("ankidaemon").password("password").roles("USER").build());
 		manager.createUser(User.withUsername("test").password("test").roles("USER").build());
 		return manager;
-	}
+	}*/
+    
+    protected void configure(HttpSecurity http) throws Exception {
+    	http
+    		.authorizeRequests()
+    			.anyRequest().authenticated()
+    			.and()
+    		.formLogin()
+    			.loginPage("/login") 
+    			.permitAll();       
+    }
 }
