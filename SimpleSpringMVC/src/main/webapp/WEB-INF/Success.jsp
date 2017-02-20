@@ -8,8 +8,6 @@
 </head>
 <body>
 <p><b>${user.userName}</b> has successfully registered !!</p>
-
-
     <a href="index.jsp">Go Home</a>
 </body>
 </html>

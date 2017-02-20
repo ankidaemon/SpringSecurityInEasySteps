@@ -22,7 +22,6 @@ import com.demo.to.User;
 @Controller
 @RequestMapping(value = "/Register")
 public class HomeController {
-
 	@Autowired
 	User user;
 	
@@ -44,19 +43,12 @@ public class HomeController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String registerCab(@Valid @ModelAttribute("user") User user, BindingResult result, RedirectAttributes attr) {
-
 		if (result.hasErrors()) {
-
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
 			attr.addFlashAttribute("user", user);
 			return "redirect:/Register";
-		}
-
-		System.out.println(user.toString());
-
-		
+		}	
 		String s=ud.save(user);
-
 		if(s.equalsIgnoreCase("Successful")){
 		attr.addFlashAttribute("user", user);
 		return "redirect:Success";}
@@ -67,7 +59,5 @@ public class HomeController {
 			attr.addFlashAttribute("error", s);
 			return "redirect:/Register";
 		}
-
 	}
-
 }

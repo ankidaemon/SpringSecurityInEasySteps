@@ -7,11 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
 @Configuration
-
 public class RepositoryConfig {
-
 	private static final Logger logger = LoggerFactory.getLogger(RepositoryConfig.class);
 
 	@Value("${jdbc.driverClassName}")
@@ -23,11 +20,8 @@ public class RepositoryConfig {
 	@Value("${jdbc.password}")
 	private String password;
 
-	
-
 	@Bean()
 	public BasicDataSource getDataSource() {
-		 
 		BasicDataSource  ds = new BasicDataSource();
 		ds.setDriverClassName(driverClassName);
 		ds.setUrl(url);
@@ -35,16 +29,5 @@ public class RepositoryConfig {
 		ds.setPassword(password);
 		System.out.println(ds.getPassword());
 		return ds;
-	}
-	
-	
-
-
-
-	
-
-	
-	
-
-	
+	}	
 }

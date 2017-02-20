@@ -22,9 +22,7 @@ import com.demo.daoImpl.UserDaoImpl;
 import com.demo.to.User;
 
 @Controller
-
 public class LoginController {
-
 	@Autowired
 	User user;
 
@@ -46,19 +44,13 @@ public class LoginController {
 
 	@RequestMapping(value = "/Login", method = RequestMethod.POST)
 	public String loginPeople(@Valid @ModelAttribute("user") User user, BindingResult result, RedirectAttributes attr,HttpServletRequest request) {
-
-		
 		if (result.hasErrors()) {
 			if(result.getFieldErrors().toString().contains("userName") || result.getFieldErrors().toString().contains("password"))
 			{attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
 			attr.addFlashAttribute("user", user);
 			return "redirect:/Login";}
 		}
-
-		System.out.println(user.toString());
-
 		String s = ud.authenticateUser(user);
-
 		if (s.equalsIgnoreCase("Successful")) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("username", user.getUserName());
@@ -69,14 +61,12 @@ public class LoginController {
 			attr.addFlashAttribute("error", s);
 			return "redirect:/Login";
 		}
-
 	}
 
 	@RequestMapping(value="/logout" , method = RequestMethod.GET)
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		session.invalidate();
-		
 		return "redirect:/";
 	}
 

@@ -7,7 +7,6 @@
 <title>Success</title>
 </head>
 <body>
-
 <%session=request.getSession(false);%>
 <%if(session.getAttribute("username")==null){
 	response.sendRedirect("/SimpleSpringMVC");

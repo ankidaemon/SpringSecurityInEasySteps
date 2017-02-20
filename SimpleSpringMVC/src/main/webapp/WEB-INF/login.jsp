@@ -10,16 +10,11 @@
 color:red;
 }
 </style>
-
 <body>
-
 <p class="errors">${error}</p>
 
 <form:form method="POST" action="Login" enctype="text" modelAttribute="user">
-
-		<form:errors path="userName" cssClass="errors" element="div" /> 
-		
-		
+		<form:errors path="userName" cssClass="errors" element="div" /> 	
 		<form:label path="userName" >Please Enter UserName : </form:label>
 		<form:input type="text"	path="userName" />
 		<br />
@@ -28,12 +23,8 @@ color:red;
 		<form:label path="password">Please Enter Password : </form:label>
 		<form:input type="password"	path="password" />
 		<br />
-		<br />
-		
-		
+		<br />	
 		<input type="submit" value="Log In" />
-		
-
 	</form:form>
 </body>
 </html>

@@ -3,7 +3,6 @@ package com.demo.config;
 import org.springframework.web.servlet.support.*;
 
 public class WebAppConfigIntializer extends AbstractAnnotationConfigDispatcherServletInitializer{
-
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
@@ -21,7 +20,4 @@ public class WebAppConfigIntializer extends AbstractAnnotationConfigDispatcherSe
 		// TODO Auto-generated method stub
 		return new String[] {"/"};
 	}
-	
-	
-	
 }

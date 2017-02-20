@@ -26,15 +26,11 @@ import com.demo.web.HomeController;
 @Component
 @Scope(scopeName = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserDaoImpl implements UserDao {
-
 	@Autowired
 	BasicDataSource ds;
 	
-	
-
 	@Override
 	public String save(User u) {
-		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = "insert into users (username,password,address,phone) values(?,?,?,?)";
@@ -45,11 +41,9 @@ public class UserDaoImpl implements UserDao {
 			ps.setString(2, u.getPassword());
 			ps.setString(3, u.getAddress());
 			ps.setString(4, u.getPhone());
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
-		
 		try {
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -61,8 +55,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void update(User u) {
-		// TODO Auto-generated method stub
-
+		// For additional functionality implement this method
 	}
 
 	@Override
@@ -79,16 +72,13 @@ public class UserDaoImpl implements UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
-		
 		try {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
-				
 				if(rs.getInt(1)==0){
 					return "Either Username or Password is incorrect.";
 				}
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "Either Username or Password is incorrect.";
@@ -98,8 +88,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<User> list() {
-		// TODO Auto-generated method stub
+		// For additional functionality implement this method
 		return null;
 	}
-
 }

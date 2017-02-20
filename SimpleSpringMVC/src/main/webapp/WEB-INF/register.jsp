@@ -10,16 +10,10 @@
 color:red;
 }
 </style>
-
 <body>
-
 <p class="errors">${error}</p>
-
 <form:form method="POST" action="Register" enctype="text" modelAttribute="user">
-
 		<form:errors path="userName" cssClass="errors" element="div" /> 
-		
-		
 		<form:label path="userName" >Please Enter Unique UserName : </form:label>
 		<form:input type="text"	path="userName" />
 		<br />
@@ -39,10 +33,7 @@ color:red;
 		<form:input type="text"	path="address" />
 		<br />
 		<br />  
-		
 		<input type="submit" value="Sign Up" />
-		
-
 	</form:form>
 </body>
 </html>

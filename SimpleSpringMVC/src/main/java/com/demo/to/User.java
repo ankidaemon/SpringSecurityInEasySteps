@@ -1,6 +1,5 @@
 package com.demo.to;
 
-
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -9,14 +8,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.ScopedProxyMode;
  
-
 @Scope(scopeName = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Component
-
-
 public class User {
-
-	
 	@Override
 	public String toString() {
 		return "User [name=" + userName + ", Address=" + address + ", Password=" + password + ", phone="
@@ -56,5 +50,4 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
 }

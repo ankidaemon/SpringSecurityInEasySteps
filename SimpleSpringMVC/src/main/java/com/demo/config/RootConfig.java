@@ -11,24 +11,14 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-
 @Import({ RepositoryConfig.class })
 public class RootConfig {
-
 	@Bean
-
 	public static PropertyPlaceholderConfigurer getPropertyPlaceholderConfigurer()
-
 	{
-
 		PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
-
 		ppc.setLocation(new ClassPathResource("application.properties"));
-
 		ppc.setIgnoreUnresolvablePlaceholders(true);
-
 		return ppc;
-
 	}
-
 }
