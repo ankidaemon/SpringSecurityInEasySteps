@@ -34,7 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		manager.createUser(User.withUsername("test").password("test").roles("USER").build());
 		return manager;
 	}*/
-    
    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
