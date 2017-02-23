@@ -1,15 +1,18 @@
 package com.demo;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 public class AuthenticationSample {
-	private static AuthenticationManager authenticationManager = new SampleAuthenticationManager();
+	private static AuthenticationManager authenticationManager = new AuthenticationManagerImpl();
 
 	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
@@ -33,17 +36,41 @@ public class AuthenticationSample {
 	}
 }
 
-class SampleAuthenticationManager implements AuthenticationManager {
-	static final List<GrantedAuthority> AUTHORITIES = new ArrayList<GrantedAuthority>();
+class AuthenticationManagerImpl implements AuthenticationManager {
 
-	static {
-		AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
+	public UserDetailsService userDetailsService() {
+		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+		manager.createUser(User.withUsername("ankidaemon").password("password").roles("ADMIN").build());
+		manager.createUser(User.withUsername("test").password("password").roles("USER").build());
+		return manager;
 	}
 
 	public Authentication authenticate(Authentication auth) throws AuthenticationException {
-		if (auth.getName().equals(auth.getCredentials())) {
-			return new UsernamePasswordAuthenticationToken(auth.getName(), auth.getCredentials(), AUTHORITIES);
+	
+		UserDetails user=userDetailsService().loadUserByUsername(auth.getName());
+		if(user !=null){
+			if(user.getPassword().equals(auth.getCredentials())){
+				if(user.getUsername().equals("ankidaemon")){
+				return new UsernamePasswordAuthenticationToken(auth.getName(), auth.getCredentials(), 
+						new ArrayList<GrantedAuthority>(){
+							{
+								add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+							}
+							});
+				}
+				else{
+					System.out.println("User is"+user.getUsername());
+					return new UsernamePasswordAuthenticationToken(auth.getName(), auth.getCredentials(), 
+							new ArrayList<GrantedAuthority>(){
+							{
+								add(new SimpleGrantedAuthority("ROLE_USER"));
+							}
+							});
+				}
+			}
 		}
+		
 		throw new BadCredentialsException("Bad Credentials");
+		
 	}
 }
