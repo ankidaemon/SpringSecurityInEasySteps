@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.demo", scopedProxy = org.springframework.context.annotation.ScopedProxyMode.TARGET_CLASS)
+@ComponentScan(basePackages = "com.demo")
 public class WebConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public ViewResolver viewResolver() {
