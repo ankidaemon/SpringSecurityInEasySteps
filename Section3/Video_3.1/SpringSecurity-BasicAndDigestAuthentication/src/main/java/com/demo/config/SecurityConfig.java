@@ -53,12 +53,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().regexMatchers("/chief/*").hasRole("USER")// .hasAuthority("ROLE_USER")
 				.regexMatchers("/agent/*").access("hasRole('AGENT') and principal.name='James Bond'").anyRequest()
 				.authenticated()
-				.and().httpBasic().authenticationEntryPoint(customBasicAuthenticationEntryPoint)
-				//.and().exceptionHandling().authenticationEntryPoint(customDigestAuthenticationEntryPoint)
+				//.and().httpBasic().authenticationEntryPoint(customBasicAuthenticationEntryPoint)
+				.and().exceptionHandling().authenticationEntryPoint(customDigestAuthenticationEntryPoint)
 				.and().requiresChannel().regexMatchers("/chief/*").requiresSecure().and().requiresChannel()
-				.regexMatchers("/admin/*").requiresInsecure().and()
-				.addFilter(basicAuthenticationFilter(super.authenticationManagerBean()));
-				//.and().addFilter(digestAuthenticationFilter());
+				.regexMatchers("/admin/*").requiresInsecure()
+				//.and().addFilter(basicAuthenticationFilter(super.authenticationManagerBean()));
+				.and().addFilter(digestAuthenticationFilter());
 
 		http.formLogin().loginPage("/login").permitAll();
 	}
