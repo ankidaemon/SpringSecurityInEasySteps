@@ -8,16 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
-/**
- * @author ankidaemon
- *
- */
 @Component
-public class CustomBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
- 
+public class CustomDigestAuthenticationEntryPoint extends DigestAuthenticationEntryPoint{
+
     @Override
     public void commence
       (HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) 
@@ -25,12 +21,15 @@ public class CustomBasicAuthenticationEntryPoint extends BasicAuthenticationEntr
     	response.addHeader("WWW-Authenticate", "Basic realm=\"" + getRealmName() + "\"");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         PrintWriter writer = response.getWriter();
-        writer.println("Basic Authentication : You are not authorized. " + exception.getMessage());
+        writer.println("DigestAuthentication : You are not authorized. " + exception.getMessage());
     }
     
     @Override
     public void afterPropertiesSet() throws Exception {
         setRealmName("Spring");
+        setKey("acegi");
+        setNonceValiditySeconds(10);
         super.afterPropertiesSet();
     }
+    
 }
