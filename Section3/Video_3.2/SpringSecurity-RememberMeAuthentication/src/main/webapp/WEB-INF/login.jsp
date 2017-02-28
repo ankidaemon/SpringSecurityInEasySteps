@@ -20,6 +20,10 @@
             <td><label for="password">Password</label></td>
             <td><input type="password" id="password" name="password"/></td>
             </tr>
+            <tr>
+            <td>Remember Me:</td>
+            <td><input type="checkbox" name="remember-me" /></td>
+            </tr>
             <tr><td><input type="submit" value="log In" /></td></tr>
             </table>
             <%-- 

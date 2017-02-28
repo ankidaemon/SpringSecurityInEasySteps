@@ -1,5 +1,7 @@
 package com.demo.config;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,6 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.authentication.www.DigestAuthenticationFilter;
 
@@ -41,39 +45,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	
 
-	@Autowired
-	private CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint;
-
-	@Autowired
-	private CustomDigestAuthenticationEntryPoint customDigestAuthenticationEntryPoint;
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests().regexMatchers("/chief/*").hasRole("USER")// .hasAuthority("ROLE_USER")
 				.regexMatchers("/agent/*").access("hasRole('AGENT') and principal.name='James Bond'").anyRequest()
 				.authenticated()
-				.and().httpBasic().authenticationEntryPoint(customBasicAuthenticationEntryPoint)
-				//.and().exceptionHandling().authenticationEntryPoint(customDigestAuthenticationEntryPoint)
+				.and().httpBasic()
 				.and().requiresChannel().regexMatchers("/chief/*").requiresSecure().and().requiresChannel()
-				.regexMatchers("/admin/*").requiresInsecure().and()
-				.addFilter(basicAuthenticationFilter(super.authenticationManagerBean()));
-				//.and().addFilter(digestAuthenticationFilter());
+				.regexMatchers("/admin/*").requiresInsecure()
+				.and().rememberMe().key("keyName").tokenRepository(persistentTokenRepository()).tokenValiditySeconds(3);
 
 		http.formLogin().loginPage("/login").permitAll();
 	}
+	
+	@Autowired
+	DataSource dataSource;
 
-	public DigestAuthenticationFilter digestAuthenticationFilter() {
-		DigestAuthenticationFilter digestAuthenticationFilter = new DigestAuthenticationFilter();
-		digestAuthenticationFilter.setAuthenticationEntryPoint(customDigestAuthenticationEntryPoint);
-		digestAuthenticationFilter.setUserDetailsService(userDetailsService());
-		return digestAuthenticationFilter;
-	}
-
-	public BasicAuthenticationFilter basicAuthenticationFilter(AuthenticationManager authManager) throws Exception {
-		BasicAuthenticationFilter basicAuthenticationFilter = new BasicAuthenticationFilter(authManager,
-				customBasicAuthenticationEntryPoint);
-		return basicAuthenticationFilter;
-
+	@Bean
+	public PersistentTokenRepository persistentTokenRepository() {
+		JdbcTokenRepositoryImpl  db = new JdbcTokenRepositoryImpl();
+		db.setDataSource(dataSource);
+		return db;
 	}
 }
