@@ -5,7 +5,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
-        <property name="context-root" value="SpringSecurity-BasicAndDigestAuthentication"/>
         <property name="java-output-path" value="/SpringSecurity-BasicAndDigestAuthentication/target/classes"/>
+        <property name="context-root" value="SpringSecurity-RememberMeAuthentication"/>
     </wb-module>
 </project-modules>
