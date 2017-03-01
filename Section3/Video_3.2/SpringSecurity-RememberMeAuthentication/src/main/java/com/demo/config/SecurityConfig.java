@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
@@ -38,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public UserDetailsService userDetailsService() {
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-		manager.createUser(User.withUsername("ankidaemon").password("password").roles("USER").build());
+		manager.createUser(User.withUsername("ankidaemon").password("password").roles("CHIEF").build());
 		manager.createUser(User.withUsername("test").password("test").roles("USER").build());
 		return manager;
 	}
@@ -48,13 +49,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().regexMatchers("/chief/*").hasRole("USER")// .hasAuthority("ROLE_USER")
-				.regexMatchers("/agent/*").access("hasRole('AGENT') and principal.name='James Bond'").anyRequest()
+		http.authorizeRequests().regexMatchers("/chief/.*").hasRole("CHIEF")// .hasAuthority("ROLE_USER")
+				.regexMatchers("/agent/.*").access("hasRole('AGENT') and principal.name='James Bond'").anyRequest()
 				.authenticated()
-				.and().httpBasic()
-				.and().requiresChannel().regexMatchers("/chief/*").requiresSecure().and().requiresChannel()
-				.regexMatchers("/admin/*").requiresInsecure()
-				.and().rememberMe().key("keyName").tokenRepository(persistentTokenRepository()).tokenValiditySeconds(3);
+			//	.and().rememberMe().key("keyName").tokenValiditySeconds(10);
+				.and().rememberMe().key("keyName").tokenRepository(persistentTokenRepository()).tokenValiditySeconds(30);
 
 		http.formLogin().loginPage("/login").permitAll();
 	}
@@ -68,4 +67,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		db.setDataSource(dataSource);
 		return db;
 	}
+	
 }

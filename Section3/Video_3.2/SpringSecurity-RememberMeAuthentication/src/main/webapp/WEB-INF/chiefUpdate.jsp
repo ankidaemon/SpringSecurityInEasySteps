@@ -10,6 +10,7 @@
 <body>
 
 	<c:if test="${pageContext.request.userPrincipal.name != null}">
+	<h1>This is chief Profile update page</h1>
 		<h2>
 			Welcome : ${pageContext.request.userPrincipal.name} | <a
 				href="${pageContext.request.contextPath}/logout"> Logout</a>				
@@ -23,8 +24,7 @@
 		<sec:authorize access="isFullyAuthenticated()">
 		<p>Full Authentication</p>
 		</sec:authorize>
-		
-		<a href="${pageContext.request.contextPath}/chief/updateProfile">Only Chief Update Profile</a>
+	
 	</c:if>
 
 </body>

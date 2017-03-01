@@ -22,7 +22,7 @@ public class WebAppIntializer extends AbstractAnnotationConfigDispatcherServletI
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
-		return new Class<?>[] { RootConfig.class, SecurityConfig.class };
+		return null;
 	}
 
 }
