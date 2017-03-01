@@ -45,10 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().regexMatchers("/chief/*").hasRole("USER")// .hasAuthority("ROLE_USER")
 				.regexMatchers("/agent/*").access("hasRole('AGENT') and principal.name='James Bond'").anyRequest()
 				.authenticated()
-				.and().httpBasic()
-				.and().requiresChannel().anyRequest().requiresSecure();
+				.and().httpBasic();
+				//.and().requiresChannel().anyRequest().requiresSecure();
 
 		http.formLogin().loginPage("/login").permitAll();
+		http.logout();
 	}
 
 }

@@ -1,5 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,8 +11,17 @@
 
 	<c:if test="${pageContext.request.userPrincipal.name != null}">
 		<h2>
-		Welcome : ${pageContext.request.userPrincipal.name} | <a
-				href="${pageContext.request.contextPath}/logout"> Logout</a>				
+		Welcome : ${pageContext.request.userPrincipal.name} | <%-- <a href="${pageContext.request.contextPath}/logout"> Logout</a> --%>	
+		
+		<c:url value="/logout" var="logOutUrl"/>
+    	<form:form name="form" action="${logOutUrl}" method="post">
+            <input type="submit" value="log Out" />
+            <%-- 
+            Section 2 - Video 2.4 - CSRF
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
+            <!-- <sec:csrfInput /> -->
+    	</form:form>
+					
  		</h2>
 		<p>Your Session id is: "${pageContext.request.session.id}"</p>
 	</c:if>
