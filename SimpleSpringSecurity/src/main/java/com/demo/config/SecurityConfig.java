@@ -40,8 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	/*
     	 * Section 2 - Video 2.3 - Access control in Spring security*/
     	http
-		.authorizeRequests().regexMatchers("/chief/*").hasRole("USER")// .hasAuthority("ROLE_USER")
-		.regexMatchers("/agent/*").access("hasRole('AGENT') and principal.name='James Bond'")
+		.authorizeRequests().regexMatchers("/chief/.*").hasRole("USER")// .hasAuthority("ROLE_USER")
+		.regexMatchers("/agent/.*").access("hasRole('AGENT') and principal.name='James Bond'")
 			.anyRequest().authenticated()
 			.and()
 		.requiresChannel().regexMatchers("/chief/*").requiresSecure().and().
