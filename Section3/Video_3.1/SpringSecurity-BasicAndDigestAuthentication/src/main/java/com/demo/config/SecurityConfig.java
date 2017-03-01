@@ -50,8 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().regexMatchers("/chief/*").hasRole("USER")// .hasAuthority("ROLE_USER")
-				.regexMatchers("/agent/*").access("hasRole('AGENT') and principal.name='James Bond'").anyRequest()
+		http.authorizeRequests().regexMatchers("/chief/.*").hasRole("USER")// .hasAuthority("ROLE_USER")
+				.regexMatchers("/agent/.*").access("hasRole('AGENT') and principal.name='James Bond'").anyRequest()
 				.authenticated()
 				//.and().httpBasic().authenticationEntryPoint(customBasicAuthenticationEntryPoint)
 				.and().exceptionHandling().authenticationEntryPoint(customDigestAuthenticationEntryPoint)
