@@ -55,8 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticated()
 				//.and().httpBasic().authenticationEntryPoint(customBasicAuthenticationEntryPoint)
 				.and().exceptionHandling().authenticationEntryPoint(customDigestAuthenticationEntryPoint)
-				.and().requiresChannel().regexMatchers("/chief/*").requiresSecure().and().requiresChannel()
-				.regexMatchers("/admin/*").requiresInsecure()
+				.and().requiresChannel().regexMatchers("/chief/.*").requiresSecure().and().requiresChannel()
+				.regexMatchers("/admin/.*").requiresInsecure()
 				//.and().addFilter(basicAuthenticationFilter(super.authenticationManagerBean()));
 				.and().addFilter(digestAuthenticationFilter());
 
