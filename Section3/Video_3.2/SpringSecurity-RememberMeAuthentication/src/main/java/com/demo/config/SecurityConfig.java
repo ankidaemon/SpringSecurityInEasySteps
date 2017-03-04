@@ -53,9 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.regexMatchers("/agent/.*").access("hasRole('AGENT') and principal.name='James Bond'").anyRequest()
 				.authenticated()
 				
-				.and().rememberMe().key("HashTokenkeyName").tokenValiditySeconds(10);
+			//	.and().rememberMe().key("HashTokenkeyName").tokenValiditySeconds(100);
 		
-			//	.and().rememberMe().key("PersistenceTokenkeyName").tokenRepository(persistentTokenRepository()).tokenValiditySeconds(30);
+				.and().rememberMe().key("PersistenceTokenkeyName").tokenRepository(persistentTokenRepository()).tokenValiditySeconds(100);
 
 		http.formLogin().loginPage("/login").permitAll();
 	}
