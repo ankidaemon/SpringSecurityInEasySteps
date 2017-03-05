@@ -1,4 +1,4 @@
-CREATE  TABLE users (
+CREATE TABLE users (
   username VARCHAR(50) NOT NULL ,
   password VARCHAR(50) NOT NULL ,
   enabled BOOLEAN NULL DEFAULT true, 
