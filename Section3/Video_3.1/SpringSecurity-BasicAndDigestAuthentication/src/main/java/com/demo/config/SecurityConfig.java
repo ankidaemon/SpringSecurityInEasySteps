@@ -39,8 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return manager;
 	}
 	
-	
-
 	@Autowired
 	private CustomBasicAuthenticationEntryPoint customBasicAuthenticationEntryPoint;
 
@@ -50,13 +48,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().regexMatchers("/chief/.*").hasRole("USER")// .hasAuthority("ROLE_USER")
+		http.authorizeRequests().regexMatchers("/chief/.*").hasRole("USER")
 				.regexMatchers("/agent/.*").access("hasRole('AGENT') and principal.name='James Bond'").anyRequest()
 				.authenticated()
+				
 				//.and().httpBasic().authenticationEntryPoint(customBasicAuthenticationEntryPoint)
 				.and().exceptionHandling().authenticationEntryPoint(customDigestAuthenticationEntryPoint)
-				.and().requiresChannel().regexMatchers("/chief/.*").requiresSecure().and().requiresChannel()
-				.regexMatchers("/admin/.*").requiresInsecure()
+				
+				.and().requiresChannel().anyRequest().requiresSecure()
+				
 				//.and().addFilter(basicAuthenticationFilter(super.authenticationManagerBean()));
 				.and().addFilter(digestAuthenticationFilter());
 
