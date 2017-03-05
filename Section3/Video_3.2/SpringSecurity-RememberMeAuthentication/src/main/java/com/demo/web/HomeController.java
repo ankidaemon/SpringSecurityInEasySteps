@@ -33,7 +33,7 @@ public class HomeController {
     }
     
     @RequestMapping(value = "/chief/updateProfile", method = RequestMethod.GET)
-	public ModelAndView updatePage(HttpServletRequest request) {
+	public ModelAndView updatePage() {
 		ModelAndView mav = new ModelAndView();
 		if (rememberMeCheck()) {
 			mav.setViewName("/login");
