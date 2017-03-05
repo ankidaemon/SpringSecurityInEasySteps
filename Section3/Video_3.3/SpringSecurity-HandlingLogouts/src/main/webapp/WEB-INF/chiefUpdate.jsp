@@ -8,20 +8,19 @@
 <title>Spring Security-HandlingLogouts</title>
 </head>
 <body>
+
 	<c:if test="${pageContext.request.userPrincipal.name != null}">
+	<h1>This is chief Profile update page</h1>
 		<h2 style="display:inline-block;">
-		Welcome : ${pageContext.request.userPrincipal.name} | <%-- <a href="${pageContext.request.contextPath}/logout"> Logout</a> --%>
+		Welcome : ${pageContext.request.userPrincipal.name} | 
 		</h2>	
 		<div style="display:inline-block;">
 		<c:url value="/logout" var="logOutUrl"/>
     	<form:form name="form" action="${logOutUrl}" method="post">
             <input type="submit" value="log Out" />
     	</form:form>
-		</div>			
- 		
+		</div>
 		<p>Your Session id is: "${pageContext.request.session.id}"</p>
-
-		<a href="${pageContext.request.contextPath}/chief/updateProfile">Only Chief Update Profile</a>
 	</c:if>
 
 </body>
