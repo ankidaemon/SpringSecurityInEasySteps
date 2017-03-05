@@ -31,22 +31,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.password("test").roles("USER");
 	}
 
-/*	@Bean
-	public UserDetailsService userDetailsService() {
-		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-		manager.createUser(User.withUsername("ankidaemon").password("password").roles("USER").build());
-		manager.createUser(User.withUsername("test").password("test").roles("USER").build());
-		return manager;
-	}*/
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().regexMatchers("/chief/*").hasRole("USER")// .hasAuthority("ROLE_USER")
-				.regexMatchers("/agent/*").access("hasRole('AGENT') and principal.name='James Bond'").anyRequest()
+		http.authorizeRequests().regexMatchers("/chief/.*").hasRole("CHIEF")
+				.regexMatchers("/agent/.*").access("hasRole('USER') and principal.name='James Bond'").anyRequest()
 				.authenticated()
-				.and().httpBasic();
-				//.and().requiresChannel().anyRequest().requiresSecure();
+				.and().httpBasic()
+				.and().requiresChannel().anyRequest().requiresSecure();
 
 		http.formLogin().loginPage("/login").permitAll();
 		http.logout();

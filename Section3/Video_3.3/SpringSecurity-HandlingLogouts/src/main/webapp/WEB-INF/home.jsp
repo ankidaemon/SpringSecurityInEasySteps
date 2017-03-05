@@ -5,24 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Simple Spring Security</title>
+<title>Spring Security-HandlingLogouts</title>
 </head>
 <body>
 
 	<c:if test="${pageContext.request.userPrincipal.name != null}">
-		<h2>
-		Welcome : ${pageContext.request.userPrincipal.name} | <%-- <a href="${pageContext.request.contextPath}/logout"> Logout</a> --%>	
-		
+		<h2 style="display:inline-block;">
+		Welcome : ${pageContext.request.userPrincipal.name} | <%-- <a href="${pageContext.request.contextPath}/logout"> Logout</a> --%>
+		</h2>	
+		<div style="display:inline-block;">
 		<c:url value="/logout" var="logOutUrl"/>
     	<form:form name="form" action="${logOutUrl}" method="post">
             <input type="submit" value="log Out" />
-            <%-- 
-            Section 2 - Video 2.4 - CSRF
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
-            <!-- <sec:csrfInput /> -->
     	</form:form>
-					
- 		</h2>
+		</div>			
+ 		
 		<p>Your Session id is: "${pageContext.request.session.id}"</p>
 	</c:if>
 
