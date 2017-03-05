@@ -15,7 +15,7 @@
 		Welcome : ${pageContext.request.userPrincipal.name} | 
 		</h2>	
 		<div style="display:inline-block;">
-		<c:url value="/logout" var="logOutUrl"/>
+		<c:url value="/customlogout" var="logOutUrl"/>
     	<form:form name="form" action="${logOutUrl}" method="post">
             <input type="submit" value="log Out" />
     	</form:form>

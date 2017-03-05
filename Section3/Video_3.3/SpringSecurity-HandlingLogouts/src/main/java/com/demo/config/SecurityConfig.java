@@ -14,6 +14,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.authentication.www.DigestAuthenticationFilter;
 
@@ -43,8 +47,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and().requiresChannel().anyRequest().requiresSecure();
 
 		http.formLogin().loginPage("/login").permitAll();
-		http.logout();
+		
 		http.exceptionHandling().accessDeniedPage("/accessDenied");
+		
+		//http.logout();
+		
+		http
+		.logout()                                             
+			.logoutUrl("/customlogout")                                           
+			.logoutSuccessUrl("/")                              
+			.logoutSuccessHandler(new CustomLogoutSuccessHandler())                              
+			.invalidateHttpSession(true) //true by default                              
+			.addLogoutHandler(new SecurityContextLogoutHandler())                                      
+			.deleteCookies("JSESSIONID");    
 	}
 	
 }

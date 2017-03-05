@@ -33,6 +33,11 @@ public class HomeController {
         return mav;
     }*/
     
+    @RequestMapping(value="/customlogout", method = RequestMethod.POST)
+    public void logOut(){
+    }
+    
+    
     @RequestMapping(value = "/chief/updateProfile", method = RequestMethod.GET)
 	public ModelAndView updatePage(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
