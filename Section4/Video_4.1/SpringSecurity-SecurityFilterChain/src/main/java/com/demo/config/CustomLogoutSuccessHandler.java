@@ -23,7 +23,7 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		
+		 setDefaultTargetUrl("/home");
 		 logger.info("Remote Address is :"+request.getRemoteAddr());
 		 logger.info("Remotes Host is :"+request.getRemoteHost());
 		 logger.info("Browser info :"+request.getHeader("User-Agent"));

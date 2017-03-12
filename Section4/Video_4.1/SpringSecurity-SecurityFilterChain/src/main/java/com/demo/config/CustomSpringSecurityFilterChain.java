@@ -1,30 +1,27 @@
 package com.demo.config;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.security.web.FilterChainProxy;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-public class CustomSpringSecurityFilterChain implements Filter{
+public class CustomSpringSecurityFilterChain extends FilterChainProxy{
 
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
+	public CustomSpringSecurityFilterChain() {
+		super(filterChains());
 	}
 
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
+	private static List<SecurityFilterChain> filterChains(){
+		List<SecurityFilterChain> filterChain= new ArrayList<SecurityFilterChain>();
+		filterChain.add(new DefaultSecurityFilterChain(
+				new AntPathRequestMatcher("/customlogout**"), 
+				new LogoutFilter(new CustomLogoutSuccessHandler(), new SecurityContextLogoutHandler())));
+		return filterChain;	
 	}
 
 }

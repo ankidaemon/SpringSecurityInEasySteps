@@ -23,16 +23,7 @@ public class HomeController {
     	ModelAndView mav = new ModelAndView("home");
         return mav;
     }
-    
-/*    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public ModelAndView logOut(SecurityContextHolder sch,HttpServletRequest request) throws ServletException {
-    	ModelAndView mav = new ModelAndView("home");
-		request.logout();
-    	//sch.getContext().setAuthentication(null);
-		//sch.clearContext();
-        return mav;
-    }*/
-    
+        
     @RequestMapping(value="/customlogout", method = RequestMethod.POST)
     public void logOut(){
     }

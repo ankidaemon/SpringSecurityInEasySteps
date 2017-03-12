@@ -29,14 +29,4 @@ public class WebAppIntializer extends AbstractAnnotationConfigDispatcherServletI
 		return null;
 	}
 
-	@Override
-	public void onStartup(ServletContext servletContext) throws ServletException {
-		
-		servletContext.addFilter(
-	            "customSpringSecurityFilterChain",
-	            new DelegatingFilterProxy("customSpringSecurityFilterChain"));
-	       
-		super.onStartup(servletContext);
-		
-	}
 }
