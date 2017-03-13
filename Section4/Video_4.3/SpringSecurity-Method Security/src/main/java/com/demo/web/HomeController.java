@@ -1,7 +1,10 @@
 package com.demo.web;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,16 +21,23 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
      
+	//@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+	@PreAuthorize("isAnonymous()")
     @RequestMapping(value="/", method = RequestMethod.GET)
     public ModelAndView visitHome() {
     	ModelAndView mav = new ModelAndView("home");
         return mav;
     }
     
+	//@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+	@PreAuthorize("isAnonymous()")
     @RequestMapping(value="/customlogout", method = RequestMethod.POST)
     public void logOut(){
     }
-        
+    
+    //@Secured("ROLE_CHIEF")
+	//@RolesAllowed("ROLE_CHIEF")
+    @PreAuthorize("hasRole('CHIEF')")
     @RequestMapping(value = "/chief/updateProfile", method = RequestMethod.GET)
 	public ModelAndView updatePage(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -49,6 +59,8 @@ public class HomeController {
 		return false;
 	}
     
+	//@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+	@PreAuthorize("isAnonymous()")
     @RequestMapping(value="/accessDenied", method = RequestMethod.GET)
     public ModelAndView accessDenied() {
     	ModelAndView mav = new ModelAndView("accessDenied");

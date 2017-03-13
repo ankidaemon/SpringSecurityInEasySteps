@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -14,6 +15,9 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
  */
 @Configuration
 @EnableWebSecurity
+//@EnableGlobalMethodSecurity(securedEnabled = true)
+//@EnableGlobalMethodSecurity(jsr250Enabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @ComponentScan(basePackages = "com.demo.config")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -27,8 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-				.regexMatchers("/chief/.*").hasRole("CHIEF")
-				.regexMatchers("/agent/.*").access("hasRole('USER') and principal.name='James Bond'")
+			//	.regexMatchers("/chief/.*").hasRole("CHIEF")
+			//	.regexMatchers("/agent/.*").access("hasRole('USER') and principal.name='James Bond'")
 				.anyRequest().authenticated()
 				.and().httpBasic()
 				.and().requiresChannel().anyRequest().requiresSecure();
