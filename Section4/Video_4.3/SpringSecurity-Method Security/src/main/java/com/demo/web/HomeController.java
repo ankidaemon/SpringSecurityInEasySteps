@@ -21,23 +21,21 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
      
-	//@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
-	@PreAuthorize("isAnonymous()")
+	@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+	//@PreAuthorize("isAnonymous()")
     @RequestMapping(value="/", method = RequestMethod.GET)
     public ModelAndView visitHome() {
     	ModelAndView mav = new ModelAndView("home");
         return mav;
     }
     
-	//@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
-	@PreAuthorize("isAnonymous()")
     @RequestMapping(value="/customlogout", method = RequestMethod.POST)
     public void logOut(){
     }
     
-    //@Secured("ROLE_CHIEF")
+    @Secured("ROLE_CHIEF")
 	//@RolesAllowed("ROLE_CHIEF")
-    @PreAuthorize("hasRole('CHIEF')")
+    //@PreAuthorize("hasRole('CHIEF')")
     @RequestMapping(value = "/chief/updateProfile", method = RequestMethod.GET)
 	public ModelAndView updatePage(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -59,8 +57,6 @@ public class HomeController {
 		return false;
 	}
     
-	//@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
-	@PreAuthorize("isAnonymous()")
     @RequestMapping(value="/accessDenied", method = RequestMethod.GET)
     public ModelAndView accessDenied() {
     	ModelAndView mav = new ModelAndView("accessDenied");
