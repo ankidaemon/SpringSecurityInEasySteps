@@ -14,7 +14,7 @@ import com.demo.dao.UserDao;
 import com.demo.to.User;
 
 @Controller
-@Scope("session")
+
 public class HomeController {
 
 	@Autowired
@@ -37,12 +37,12 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		String s = ud.save(user);
 		if (s.equalsIgnoreCase("Successful")) {
-			mav.addObject("user", user);
 			mav.setViewName("login");
 			return mav;
 		} else {
 			attr.addFlashAttribute("user", user);
 			attr.addFlashAttribute("error", s);
+			mav.addObject("error", s);
 			mav.setViewName("signup");
 			return mav;
 		}

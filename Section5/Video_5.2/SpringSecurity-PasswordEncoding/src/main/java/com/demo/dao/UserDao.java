@@ -16,11 +16,11 @@ import com.demo.to.User;
 
 @Repository
 @Component
-@Scope("session")
+
 public class UserDao {
 
-
-	private PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	DriverManagerDataSource ds;
@@ -48,6 +48,16 @@ public class UserDao {
 			e.printStackTrace();
 			return "User already Exists! Please choose a different user name";
 		} 
+		String authQuery = "insert into user_roles  (username,role) values('"+user.getUsername()+"','ROLE_USER')";
+		try {
+			con=ds.getConnection();
+			Statement s=con.createStatement();
+			s.executeUpdate(authQuery);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "Failed";
+		}
 		return "Successful";
 	}
 	
