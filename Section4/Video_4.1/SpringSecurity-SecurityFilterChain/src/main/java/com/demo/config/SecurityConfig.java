@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -41,20 +42,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+						
 		http.authorizeRequests()
 				.regexMatchers("/chief/.*").hasRole("CHIEF")
 				.regexMatchers("/agent/.*").access("hasRole('USER') and principal.name='James Bond'")
 				.anyRequest().authenticated()
 				.and().httpBasic()
-				.and().requiresChannel().anyRequest().requiresSecure();
-
-		http.formLogin().loginPage("/login").permitAll();
+				.and().requiresChannel().anyRequest().requiresSecure();	
 		
 		http.exceptionHandling().accessDeniedPage("/accessDenied");
 		
-		http
-		.logout()                                             
-			.logoutUrl("/customlogout");                                         
+		http.formLogin().loginPage("/login").permitAll();
+		
+		//http.logout().logoutUrl("/customlogout");
+		
 	}
 	
 	@Override

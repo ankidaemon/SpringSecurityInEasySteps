@@ -4,6 +4,10 @@ import javax.servlet.ServletContext;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
+/**
+ * @author ankidaemon
+ *
+ */
 public class SecurityWebAppInitializer extends AbstractSecurityWebApplicationInitializer {
  
     public SecurityWebAppInitializer() {

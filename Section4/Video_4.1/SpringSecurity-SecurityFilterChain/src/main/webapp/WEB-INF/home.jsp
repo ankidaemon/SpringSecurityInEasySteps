@@ -10,7 +10,7 @@
 <body>
 	<c:if test="${pageContext.request.userPrincipal.name != null}">
 		<h2 style="display:inline-block;">
-		Welcome : ${pageContext.request.userPrincipal.name} | <%-- <a href="${pageContext.request.contextPath}/logout"> Logout</a> --%>
+		Welcome : ${pageContext.request.userPrincipal.name} | 
 		</h2>	
 		<div style="display:inline-block;">
 		<c:url value="/customlogout" var="logOutUrl"/>
