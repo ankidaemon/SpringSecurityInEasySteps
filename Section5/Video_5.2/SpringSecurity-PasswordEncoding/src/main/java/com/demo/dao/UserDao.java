@@ -6,17 +6,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import com.demo.to.User;
+import com.demo.to.UserTo;
 
+/**
+ * @author ankidaemon
+ *
+ */
 @Repository
 @Component
-
 public class UserDao {
 
 	@Autowired
@@ -25,8 +26,8 @@ public class UserDao {
 	@Autowired
 	DriverManagerDataSource ds;
 	 
-	public String save(User userto){
-	    User user = new User();
+	public String save(UserTo userto){
+	    UserTo user = new UserTo();
 	    user.setUsername(userto.getUsername());
 	    user.setPassword(passwordEncoder.encode(userto.getPassword()));
 	    Connection con = null;

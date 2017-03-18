@@ -1,11 +1,10 @@
 package com.demo.to;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
 
-public class User {
+public class UserTo {
 
     private String username;
     private String password;

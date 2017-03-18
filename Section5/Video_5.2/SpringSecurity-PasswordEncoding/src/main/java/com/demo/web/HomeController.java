@@ -1,7 +1,6 @@
 package com.demo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.dao.UserDao;
-import com.demo.to.User;
+import com.demo.to.UserTo;
 
 @Controller
 
@@ -28,12 +27,12 @@ public class HomeController {
 
 	@RequestMapping(value = "/signupRequest", method = RequestMethod.GET)
 	public String registration(Model model) {
-        model.addAttribute("userTo", new User());
+        model.addAttribute("userTo", new UserTo());
         return "signup";
     }
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public ModelAndView singUp(@ModelAttribute("userTo") User user,RedirectAttributes attr) {
+	public ModelAndView singUp(@ModelAttribute("userTo") UserTo user,RedirectAttributes attr) {
 		ModelAndView mav = new ModelAndView();
 		String s = ud.save(user);
 		if (s.equalsIgnoreCase("Successful")) {
