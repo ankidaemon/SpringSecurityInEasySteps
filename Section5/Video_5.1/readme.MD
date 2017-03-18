@@ -1,4 +1,4 @@
-#SpringSecurity-MongoDBUserDetailsService
+###SpringSecurity-MongoDBUserDetailsService
 
   * Download and Install MongoDB
       https://www.mongodb.com/download-center
@@ -14,3 +14,4 @@
   * Clean and build project in eclipse
   * Run "InsertIntoMongo" as Java Application, placed under src/test/java , to insert users into MongoDB
   * Run on db prompt - db.userTo.find() - to fetch users.
+  * Run Project on Server and log in to application.
