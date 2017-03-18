@@ -1,10 +1,10 @@
 # SpringSecurityInEasySteps
 
-###Security Internals###
+### Security Internals 
 
-###Simple Spring MVC - Java Config###
+### Simple Spring MVC - Java Config 
 
-###Spring Security – Architecture, Components and Java configuration###
+### Spring Security – Architecture, Components and Java configuration 
 
  * Web Security Java Configuration
  * HttpSecurity
@@ -18,4 +18,7 @@
  * In-Memory and JDBC authentication
  * UserDetailsService Implementations
  * Password Encoding
-
+ * Method Security
+ * Custom Spring Security Filter Chain
+ * Custom Filters and registration
+ * Configure Http Response Headers
