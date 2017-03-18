@@ -1,9 +1,5 @@
 package com.demo.to;
 
-import org.springframework.stereotype.Component;
-
-@Component
-
 public class UserTo {
 
     private String username;
